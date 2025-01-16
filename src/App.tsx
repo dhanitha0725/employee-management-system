@@ -4,11 +4,13 @@ import EmployeePage from "./pages/EmployeePage";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<EmployeePage />} />
-      </Routes>
-    </Router>
+    <div style={{ height: "100%", width: "100%" }}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<EmployeePage />} />
+        </Routes>
+      </Router>
+    </div>
   );
 };
 

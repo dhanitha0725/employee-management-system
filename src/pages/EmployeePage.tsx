@@ -8,25 +8,29 @@ const EmployeePage: React.FC = () => {
   return (
     <div>
       <Navbar />
+      {/* content */}
       <Box
         sx={{
+          flex: 1,
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh",
-          padding: "2px",
+          padding: "20px",
           boxSizing: "border-box",
           textAlign: "center",
+          width: "100%",
         }}
       >
-        <h1>Employee Details</h1>
+        <h1 style={{ marginBottom: "20px" }}>Employee Details</h1>
         <Box
           sx={{
             width: "100%",
-            marginTop: "20px",
+            maxWidth: "1000px",
             display: "flex",
+            flexDirection: "column",
             justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <EmployeeTable employees={employees} />
