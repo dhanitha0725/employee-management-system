@@ -8,16 +8,7 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-//import { Employee } from "../../Types/Employee";
-
-export interface Employee {
-  id: number;
-  firstName: string;
-  lastName: string;
-  address: string;
-  phone: string;
-  accountId: string;
-}
+import { Employee } from "../../Types/Employee";
 
 interface EmployeeTableProps {
   employees: Employee[];
@@ -35,27 +26,24 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees }) => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
-
+            <TableCell>Employee ID</TableCell>
             <TableCell>First Name</TableCell>
             <TableCell>Last Name</TableCell>
             <TableCell>Address</TableCell>
             <TableCell>Phone</TableCell>
-
             <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {employees.map((employee) => (
-            <TableRow key={employee.id}>
-              <TableCell>{employee.id}</TableCell>
-              <TableCell>{employee.firstName}</TableCell>
-              <TableCell>{employee.lastName}</TableCell>
+            <TableRow key={employee.employee_id}>
+              <TableCell>{employee.employee_id}</TableCell>
+              <TableCell>{employee.first_name}</TableCell>
+              <TableCell>{employee.last_name}</TableCell>
               <TableCell>{employee.address}</TableCell>
               <TableCell>{employee.phone}</TableCell>
-
               <TableCell>
-                <button>Edit</button>
+                <button style={{ marginRight: "10px" }}>Edit</button>
                 <button>Delete</button>
               </TableCell>
             </TableRow>
