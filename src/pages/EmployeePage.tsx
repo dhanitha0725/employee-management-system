@@ -8,7 +8,7 @@ import "../styles/EmployeePage.css";
 const EmployeePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  // handle search
+  // Handle search
   const handleSearch = (query: string) => {
     setSearchQuery(query);
   };

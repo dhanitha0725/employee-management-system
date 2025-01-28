@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Button,
 } from "@mui/material";
 import { TableVirtuoso, TableComponents } from "react-virtuoso";
 import { Employee } from "../../Types/Employee";
@@ -30,6 +31,16 @@ const columns = [
     width: 100,
     label: "Last Name",
     dataKey: "last_name",
+  },
+  {
+    width: 100,
+    label: "Email",
+    dataKey: "email",
+  },
+  {
+    width: 100,
+    label: "Role",
+    dataKey: "role",
   },
   {
     width: 200,
@@ -92,8 +103,16 @@ function rowContent(_index: number, row: Employee) {
         <TableCell key={column.dataKey} align="left">
           {column.dataKey === "actions" ? (
             <>
-              <button style={{ marginRight: "10px" }}>Edit</button>
-              <button>Delete</button>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ marginRight: "10px" }}
+              >
+                Edit
+              </Button>
+              <Button variant="contained" color="error">
+                Delete
+              </Button>
             </>
           ) : (
             row[column.dataKey as keyof Employee]
