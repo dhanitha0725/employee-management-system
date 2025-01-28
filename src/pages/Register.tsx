@@ -52,8 +52,8 @@ const Register: React.FC = () => {
                 </div>
 
                 {/* Right Side (Form) */}
-                <div className="col-md-6 d-flex align-items-center justify-content-center">
-                    <div className="card shadow-lg p-4" style={{ height: "85vh", width: "80vh"}}>
+                <div className="col-12 col-md-6 d-flex align-items-center justify-content-center p-3">
+                    <div className="card shadow-lg p-4 w-100" style={{ maxWidth: "500px"}}>
                         <h1 className="text-center mb-5" style={{ color:"#3a5c64", fontWeight:600 }}>Employee Registration</h1>
                         <form onSubmit={save} className="needs-validation">
                             <div className="form-floating mb-3 mx-5">                                
@@ -80,7 +80,7 @@ const Register: React.FC = () => {
                                     required
                                 />
                                 <label htmlFor="lastname">Last Name</label>
-                            </div>
+                            </div>         
 
                             <div className="form-floating mb-3 mx-5">                                
                                 <input 
@@ -151,7 +151,7 @@ const Register: React.FC = () => {
                                 <button 
                                     type="submit" 
                                     className="btn" 
-                                    style={{ backgroundColor: '#ff735c', color: 'white', width: '20%' }}
+                                    style={{ backgroundColor: '#ff735c', color: 'white', width: '50%' }}
                                 >
                                     Sign Up
                                 </button>
@@ -159,7 +159,7 @@ const Register: React.FC = () => {
 
                             <div className="d-flex justify-content-center mt-3">
                                 <p>Already have an Account?</p>
-                                <a href="/Login" className="ms-2" style={{ color: '#ff735c'}}>Login</a>
+                                <a href="/" className="ms-2" style={{ color: '#ff735c'}}>Login</a>
                             </div>
 
                         </form>

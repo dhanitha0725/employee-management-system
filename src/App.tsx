@@ -10,8 +10,8 @@ const App: React.FC = () => {
     <div style={{ height: "100%", width: "100%" }}>
       <Router>
         <Routes>
-          <Route path="/" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Login />} />
           <Route path="/employeePage" element={<EmployeePage />} />
           <Route path="/employeeProfile" element={<EmployeeProfile />} /> {/* Add this line */}
         </Routes>
