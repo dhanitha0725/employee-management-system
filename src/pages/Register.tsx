@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import RegisterImg from '../assets/RegisterImg.jpg';
+import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Register: React.FC = () => {
@@ -10,6 +11,7 @@ const Register: React.FC = () => {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     async function save(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -23,6 +25,7 @@ const Register: React.FC = () => {
                 password: password,
             });
             alert("Employee Registration Successfully");
+            navigate("/login");
         } catch (err) {
             alert(err);
         }
