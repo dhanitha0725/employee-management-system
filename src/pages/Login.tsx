@@ -51,7 +51,7 @@ function Login() {
                 {/* Right Side (Form) */}
                 <div className="col-md-6 d-flex align-items-center justify-content-center">
                     <div className="card shadow-lg p-4" style={{ height: "60vh", width: "70vh"}}>
-                        <h1 className="text-center mb-5 mt-5">Employee Login</h1>
+                        <h1 className="text-center mb-5 mt-5" style={{ color:"#3a5c64" , fontWeight:600 }}>Employee Login</h1>
                         <form onSubmit={login}>
                         <div className="form-floating mb-5 mx-5 mt-3">                            
                             <input

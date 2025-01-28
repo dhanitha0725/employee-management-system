@@ -21,7 +21,7 @@ const Register: React.FC = () => {
             alert("Passwords do not match!"); // Validation
             return;
         }
-        
+
         try {
             await axios.post("http://localhost:8090/employee/save", {
                 first_name: firstname,
@@ -54,7 +54,7 @@ const Register: React.FC = () => {
                 {/* Right Side (Form) */}
                 <div className="col-md-6 d-flex align-items-center justify-content-center">
                     <div className="card shadow-lg p-4" style={{ height: "85vh", width: "80vh"}}>
-                        <h1 className="text-center mb-5">Employee Registration</h1>
+                        <h1 className="text-center mb-5" style={{ color:"#3a5c64", fontWeight:600 }}>Employee Registration</h1>
                         <form onSubmit={save} className="needs-validation">
                             <div className="form-floating mb-3 mx-5">                                
                                 <input 
