@@ -16,21 +16,26 @@ function Login() {
                 password: password,
             }).then((res) => {
                 console.log(res.data);
-
-                if (res.data.message === "Email not exists") {
-                    alert("Email not exists");
-                } else if (res.data.message === "Login Success") {
+    
+                // Check if a token is returned
+                if (res.data.access_token) {
+                    // Save the token (e.g., in localStorage) for later use
+                    localStorage.setItem('authToken', res.data.access_token);
+    
+                    // Navigate to the employee page
                     navigate('/employeePage');
                 } else {
-                    alert("Incorrect Email or Password");
+                    // If no token, display an error
+                    alert("Login failed. Please check your email or password.");
                 }
             }, fail => {
                 console.error(fail);
             });
         } catch (err) {
-            alert(err);
+            alert("An error occurred during login. Please try again.");
+            console.error(err);
         }
-    }
+    }    
 
     return (
         <div className="container mt-5">
