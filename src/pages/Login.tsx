@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import RegisterImg from '../assets/RegisterImg.jpg';
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './style.css';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -49,50 +50,49 @@ function Login() {
                 </div>
 
                 {/* Right Side (Form) */}
-                <div className="col-md-6 d-flex align-items-center justify-content-center">
-                    <div className="card shadow-lg p-4" style={{ height: "60vh", width: "70vh"}}>
-                        <h1 className="text-center mb-5 mt-5" style={{ color:"#3a5c64" , fontWeight:600 }}>Employee Login</h1>
+                <div className="col-12 col-md-6 d-flex align-items-center justify-content-center p-3">
+                    <div className="card shadow-lg p-4 w-100" style={{ maxWidth: "500px"}}>
+                        <h1 className="text-center mb-4" style={{ color:"#3a5c64", fontWeight:600 }}>Employee Login</h1>
                         <form onSubmit={login}>
-                        <div className="form-floating mb-5 mx-5 mt-3">                            
-                            <input
-                                type="email"
-                                className="form-control"
-                                id="email"
-                                placeholder="Enter Email"
-                                value={email}
-                                onChange={(event) => setEmail(event.target.value)}
-                            />
-                            <label htmlFor="email">Email</label>
-                        </div>
+                            <div className="form-floating mb-4">                            
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    id="email"
+                                    placeholder="Enter Email"
+                                    value={email}
+                                    onChange={(event) => setEmail(event.target.value)}
+                                />
+                                <label htmlFor="email">Email</label>
+                            </div>
 
-                        <div className="form-floating mb-4 mx-5">                            
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="password"
-                                placeholder="Enter Password"
-                                value={password}
-                                onChange={(event) => setPassword(event.target.value)}
-                            />
-                            <label htmlFor="password">Password</label>
-                        </div>
+                            <div className="form-floating mb-4">                            
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="password"
+                                    placeholder="Enter Password"
+                                    value={password}
+                                    onChange={(event) => setPassword(event.target.value)}
+                                />
+                                <label htmlFor="password">Password</label>
+                            </div>
 
-                        <div className="d-flex justify-content-center mt-5">
+                            <div className="d-flex justify-content-center mt-4">
                                 <button 
                                     type="submit" 
                                     className="btn" 
-                                    style={{ backgroundColor: '#ff735c', color: 'white', width: '20%' }}
+                                    style={{ backgroundColor: '#ff735c', color: 'white', width: '50%' }}
                                 >
                                     Login
                                 </button>                                
-                        </div>
+                            </div>
 
-                        <div className="d-flex justify-content-center mt-3">
-                            <p>Don't Have an Account?</p>
-                            <a href="/" className="ms-2" style={{ color: '#ff735c'}}>Sign Up</a>
-                        </div>                        
-                        
-                    </form>
+                            <div className="d-flex justify-content-center mt-3">
+                                <p>Don't Have an Account?</p>
+                                <a href="/register" className="ms-2" style={{ color: '#ff735c'}}>Sign Up</a>
+                            </div>                        
+                        </form>
                     </div>
                 </div>
             </div>
