@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import RegisterImg from '../assets/RegisterImg.jpg';
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,10 +19,7 @@ function Login() {
                 console.log(res.data);
     
                 // Check if a token is returned
-                if (res.data.access_token) {
-                    // Save the token (e.g., in localStorage) for later use
-                    localStorage.setItem('authToken', res.data.access_token);
-    
+                if (res.data.access_token) {    
                     // Navigate to the employee page
                     navigate('/employeePage');
                 } else {
@@ -38,13 +36,24 @@ function Login() {
     }    
 
     return (
-        <div className="container mt-5">
-            <div className="row justify-content-center">
-                <div className="col-sm-6">
-                    <h2 className="text-center mb-4">Login</h2>
-                    <form onSubmit={login}>
-                        <div className="form-group mb-3">
-                            <label htmlFor="email">Email</label>
+        <div className="container-fluid vh-100">
+            <div className="row">
+                {/* Left Side (Image) */}
+                <div className="col-md-6 d-flex align-items-center justify-content-center">
+                    <img 
+                        src={RegisterImg} 
+                        alt="Placeholder"
+                        className="img-fluid rounded"
+                        style={{ height: '80%', objectFit: 'contain' }}
+                    />
+                </div>
+
+                {/* Right Side (Form) */}
+                <div className="col-md-6 d-flex align-items-center justify-content-center">
+                    <div className="card shadow-lg p-4" style={{ height: "60vh", width: "70vh"}}>
+                        <h1 className="text-center mb-5 mt-5">Employee Login</h1>
+                        <form onSubmit={login}>
+                        <div className="form-floating mb-5 mx-5 mt-3">                            
                             <input
                                 type="email"
                                 className="form-control"
@@ -53,10 +62,10 @@ function Login() {
                                 value={email}
                                 onChange={(event) => setEmail(event.target.value)}
                             />
+                            <label htmlFor="email">Email</label>
                         </div>
 
-                        <div className="form-group mb-3">
-                            <label htmlFor="password">Password</label>
+                        <div className="form-floating mb-4 mx-5">                            
                             <input
                                 type="password"
                                 className="form-control"
@@ -65,10 +74,26 @@ function Login() {
                                 value={password}
                                 onChange={(event) => setPassword(event.target.value)}
                             />
+                            <label htmlFor="password">Password</label>
                         </div>
 
-                        <button type="submit" className="btn btn-primary w-100">Login</button>
+                        <div className="d-flex justify-content-center mt-5">
+                                <button 
+                                    type="submit" 
+                                    className="btn" 
+                                    style={{ backgroundColor: '#ff735c', color: 'white', width: '20%' }}
+                                >
+                                    Login
+                                </button>                                
+                        </div>
+
+                        <div className="d-flex justify-content-center mt-3">
+                            <p>Don't Have an Account?</p>
+                            <a href="/" className="ms-2" style={{ color: '#ff735c'}}>Sign Up</a>
+                        </div>                        
+                        
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
