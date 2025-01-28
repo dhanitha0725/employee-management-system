@@ -20,7 +20,8 @@ function Login() {
                 console.log(res.data);
     
                 // Check if a token is returned
-                if (res.data.access_token) {    
+                if (res.data.access_token) {  
+                    localStorage.setItem('authToken', res.data.access_token);  
                     // Navigate to the employee page
                     navigate('/employeePage');
                 } else {
