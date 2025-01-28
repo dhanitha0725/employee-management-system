@@ -11,10 +11,17 @@ const Register: React.FC = () => {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const navigate = useNavigate();
 
     async function save(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!"); // Validation
+            return;
+        }
+        
         try {
             await axios.post("http://localhost:8090/employee/save", {
                 first_name: firstname,
@@ -46,10 +53,10 @@ const Register: React.FC = () => {
 
                 {/* Right Side (Form) */}
                 <div className="col-md-6 d-flex align-items-center justify-content-center">
-                    <div className="card shadow-lg p-4" style={{ height: "80vh", width: "70vh"}}>
+                    <div className="card shadow-lg p-4" style={{ height: "85vh", width: "80vh"}}>
                         <h1 className="text-center mb-5">Employee Registration</h1>
                         <form onSubmit={save} className="needs-validation">
-                            <div className="form-floating mb-4 mx-5">                                
+                            <div className="form-floating mb-3 mx-5">                                
                                 <input 
                                     type="text" 
                                     className="form-control" 
@@ -62,7 +69,7 @@ const Register: React.FC = () => {
                                 <label htmlFor="firstname">First Name</label>
                             </div>
 
-                            <div className="form-floating mb-4 mx-5">                                
+                            <div className="form-floating mb-3 mx-5">                                
                                 <input 
                                     type="text" 
                                     className="form-control" 
@@ -75,7 +82,7 @@ const Register: React.FC = () => {
                                 <label htmlFor="lastname">Last Name</label>
                             </div>
 
-                            <div className="form-floating mb-4 mx-5">                                
+                            <div className="form-floating mb-3 mx-5">                                
                                 <input 
                                     type="text" 
                                     className="form-control" 
@@ -88,7 +95,7 @@ const Register: React.FC = () => {
                                 <label htmlFor="address">Address</label>
                             </div>
 
-                            <div className="form-floating mb-4 mx-5">                                
+                            <div className="form-floating mb-3 mx-5">                                
                                 <input 
                                     type="email" 
                                     className="form-control" 
@@ -101,7 +108,7 @@ const Register: React.FC = () => {
                                 <label htmlFor="email">Email</label>
                             </div>
 
-                            <div className="form-floating mb-4 mx-5">                                
+                            <div className="form-floating mb-3 mx-5">                                
                                 <input 
                                     type="text" 
                                     className="form-control" 
@@ -114,7 +121,7 @@ const Register: React.FC = () => {
                                 <label htmlFor="phone">Phone Number</label>
                             </div>
 
-                            <div className="form-floating mb-4 mx-5">                                
+                            <div className="form-floating mb-3 mx-5">                                
                                 <input 
                                     type="password" 
                                     className="form-control" 
@@ -127,6 +134,19 @@ const Register: React.FC = () => {
                                 <label htmlFor="password">Password</label>
                             </div>
 
+                            <div className="form-floating mb-3 mx-5">                                
+                                <input 
+                                    type="password" 
+                                    className="form-control" 
+                                    id="confirmPassword" 
+                                    placeholder="Confirm Password"
+                                    value={confirmPassword}
+                                    onChange={(event) => setConfirmPassword(event.target.value)}
+                                    required
+                                />
+                                <label htmlFor="confirmPassword">Confirm Password</label>
+                            </div>
+
                             <div className="d-flex justify-content-center mt-5">
                                 <button 
                                     type="submit" 
@@ -136,6 +156,12 @@ const Register: React.FC = () => {
                                     Sign Up
                                 </button>
                             </div>
+
+                            <div className="d-flex justify-content-center mt-3">
+                                <p>Already have an Account?</p>
+                                <a href="/Login" className="ms-2" style={{ color: '#ff735c'}}>Login</a>
+                            </div>
+
                         </form>
                     </div>
                 </div>
