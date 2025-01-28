@@ -11,7 +11,7 @@ function Login() {
     async function login(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         try {
-            await axios.post("http://localhost:8090/employee/login", {
+            await axios.post("http://localhost:8090/auth/login", {
                 email: email,
                 password: password,
             }).then((res) => {
@@ -20,7 +20,7 @@ function Login() {
                 if (res.data.message === "Email not exists") {
                     alert("Email not exists");
                 } else if (res.data.message === "Login Success") {
-                    navigate('/home');
+                    navigate('/employeePage');
                 } else {
                     alert("Incorrect Email or Password");
                 }
