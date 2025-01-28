@@ -9,10 +9,10 @@ const EmployeeTableContainer: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  //fetch the token
+  // Fetch the token from local storage
   const token = localStorage.getItem("token");
 
-  //fetch emp data when component mounts
+  // Fetch employee data when component mounts
   useEffect(() => {
     const fetchEmployeesData = async () => {
       if (!token) {
@@ -24,6 +24,7 @@ const EmployeeTableContainer: React.FC = () => {
 
       try {
         const employeeData = await fetchEmployees(token);
+        console.log("Fetched employee data:", employeeData);
         setEmployees(employeeData);
       } catch (error) {
         console.error("Error fetching employees:", error);
