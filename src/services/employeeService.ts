@@ -1,12 +1,14 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8090/users/";
-const DELETE_API_URL = "http://localhost:8090/employee";
+const GET_ALL_USERS_API_URL = "http://localhost:8090/users/";
+const DELETE_API_URL = "http://localhost:8090/employee/";
+const GET_USER_BY_ID_API_URL = "http://localhost:8090/employee/getEmployeeById";
+const UPDATE_USER_API_URL = "http://localhost:8090/employee/update";
 
 // fetch all employees
 export const fetchEmployees = async (token: string) => {
   try {
-    const response = await axios.get(API_URL, {
+    const response = await axios.get(GET_ALL_USERS_API_URL, {
         headers: {
             Authorization: `Bearer ${token}`, //pass jwt token
         },
@@ -26,6 +28,36 @@ export const deleteEmployee = async (employeeId: number, token: string): Promise
     });
   } catch (error) {
     console.error("Delete error:", error);
+    throw error;
+  }
+};
+
+// Fetch employee by ID
+export const fetchEmployee = async (employeeId: number, token: string) => {
+  try {
+    const response = await axios.get(`${GET_USER_BY_ID_API_URL}/${employeeId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Pass JWT token
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching employee:", error);
+    throw error;
+  }
+};
+
+// Update employee
+export const updateEmployee = async (employeeId: number, token: string, employeeData: any) => {
+  try {
+    const response = await axios.put(`${UPDATE_USER_API_URL}/${employeeId}`, employeeData, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Pass JWT token
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating employee:", error);
     throw error;
   }
 };

@@ -22,6 +22,7 @@ const EmployeeTableContainer: React.FC = () => {
     try {
       const employeeData = await fetchEmployees(token);
       setEmployees(employeeData);
+      //console.log("Fetched employees:", employeeData); //debug line
     } catch (error) {
       console.error("Error fetching employees:", error);
       setError("Error fetching employees");
@@ -67,7 +68,9 @@ const EmployeeTableContainer: React.FC = () => {
     );
   }
 
-  return <EmployeeTable employees={employees} fetchEmployees={fetchEmployeesData} />;
+  return (
+    <EmployeeTable employees={employees} fetchEmployees={fetchEmployeesData} />
+  );
 };
 
 export default EmployeeTableContainer;

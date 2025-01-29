@@ -10,7 +10,10 @@ interface EmployeeTableProps {
   fetchEmployees: () => void; // Function to refetch employees after deletion
 }
 
-const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, fetchEmployees }) => {
+const EmployeeTable: React.FC<EmployeeTableProps> = ({
+  employees,
+  fetchEmployees,
+}) => {
   const navigate = useNavigate();
 
   const handleDelete = async (employeeId: number) => {
@@ -26,16 +29,16 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, fetchEmployees
       if (fetchEmployees) {
         fetchEmployees(); // Only call if it exists
       }
-    } catch{
+    } catch {
       alert("An error occurred while deleting the employee.");
     }
   };
-  
+
   // Define columns for the table
   const columns = useMemo<MRT_ColumnDef<Employee>[]>(
     () => [
       {
-        accessorKey: "id", // Employee ID
+        accessorKey: "employeeId", // Employee ID
         header: "Employee ID",
         size: 100,
       },
@@ -79,14 +82,16 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, fetchEmployees
               variant="contained"
               color="primary"
               style={{ marginRight: "10px" }}
-              onClick={() => navigate(`/employee/update/${row.original.id}`)}
+              onClick={() =>
+                navigate(`/employee/update/${row.original.employeeId}`)
+              }
             >
               Edit
             </Button>
             <Button
               variant="contained"
               color="error"
-              onClick={() => handleDelete(row.original.id)}
+              onClick={() => handleDelete(row.original.employeeId)}
             >
               Delete
             </Button>
@@ -94,7 +99,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, fetchEmployees
         ),
       },
     ],
-    [navigate]
+    [handleDelete]
   );
 
   return (
