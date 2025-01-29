@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Employee } from "../../Types/Employee";
-import EmployeeTable from "./EmployeeTable";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { fetchEmployees } from "../../services/employeeService";
+import EmployeeTable from "./EmployeeTable";
 
 const EmployeeTableContainer: React.FC = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -12,25 +12,26 @@ const EmployeeTableContainer: React.FC = () => {
   // Fetch the token from local storage
   const token = localStorage.getItem("authToken");
 
+  const fetchEmployeesData = async () => {
+    if (!token) {
+      setError("Authentication required");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const employeeData = await fetchEmployees(token);
+      setEmployees(employeeData);
+    } catch (error) {
+      console.error("Error fetching employees:", error);
+      setError("Error fetching employees");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Fetch employee data when component mounts
   useEffect(() => {
-    const fetchEmployeesData = async () => {
-      if (!token) {
-        setError("Authentication required");
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const employeeData = await fetchEmployees(token);
-        setEmployees(employeeData);
-      } catch (error) {
-        console.error("Error fetching employees:", error);
-        setError("Error fetching employees");
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchEmployeesData();
   }, [token]);
 
@@ -66,7 +67,7 @@ const EmployeeTableContainer: React.FC = () => {
     );
   }
 
-  return <EmployeeTable employees={employees} />;
+  return <EmployeeTable employees={employees} fetchEmployees={fetchEmployeesData} />;
 };
 
 export default EmployeeTableContainer;
