@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress, Container, Typography, Paper, Button, Box } from "@mui/material";
 import useremp from "../assets/useremp.png"; 
+import Navbar from "../components/common/Navbar";
 import { fetchEmployeeDetails } from "../services/employeeProfileService";
 
 interface Employee {
@@ -87,36 +88,39 @@ const EmployeeProfile: React.FC = () => {
     }
 
     return (
-        <Container maxWidth="sm" sx={{ mt: 5 }}>
-            <Paper elevation={3} sx={{ p: 4, borderRadius: 3, textAlign: "center", backgroundColor: "#f9f9f9" }}>
-                <Typography variant="h4" fontWeight="bold" gutterBottom color="#3a5c64">
-                    User Profile
-                </Typography>
-                <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
-                    <img src={useremp} alt="Employee" style={{ width: 120, height: 120, borderRadius: "50%", marginBottom: 10 }} />
-                    <Typography variant="h5" fontWeight="bold">
-                        {employee.first_name} {employee.last_name}
+        <>
+            <Navbar/>
+            <Container maxWidth="sm" sx={{ mt: 5 }}>
+                <Paper elevation={3} sx={{ p: 4, borderRadius: 3, textAlign: "center", backgroundColor: "#f9f9f9" }}>
+                    <Typography variant="h4" fontWeight="bold" gutterBottom color="#3a5c64">
+                        User Profile
                     </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        {employee.role}
-                    </Typography>
-                </Box>
-                <Paper elevation={1} sx={{ p: 3, textAlign: "left", backgroundColor: "#fff", borderRadius: 2 }}>
-                    <Typography variant="body1"><strong>ID:</strong> {employee.id}</Typography>
-                    <Typography variant="body1" mt={1}><strong>First Name:</strong> {employee.first_name}</Typography>
-                    <Typography variant="body1" mt={1}><strong>Last Name:</strong> {employee.last_name}</Typography>
-                    <Typography variant="body1" mt={1}><strong>Email:</strong> {employee.email}</Typography>
-                    <Typography variant="body1" mt={1}><strong>Address:</strong> {employee.address}</Typography>
-                    <Typography variant="body1" mt={1}><strong>Phone:</strong> {employee.phone}</Typography>
-                    <Typography variant="body1" mt={1}><strong>Role:</strong> {employee.role}</Typography>
+                    <Box display="flex" flexDirection="column" alignItems="center" mb={3}>
+                        <img src={useremp} alt="Employee" style={{ width: 120, height: 120, borderRadius: "50%", marginBottom: 10 }} />
+                        <Typography variant="h5" fontWeight="bold">
+                            {employee.first_name} {employee.last_name}
+                        </Typography>
+                        <Typography variant="subtitle1" color="textSecondary">
+                            {employee.role}
+                        </Typography>
+                    </Box>
+                    <Paper elevation={1} sx={{ p: 3, textAlign: "left", backgroundColor: "#fff", borderRadius: 2 }}>
+                        <Typography variant="body1"><strong>ID:</strong> {employee.id}</Typography>
+                        <Typography variant="body1" mt={1}><strong>First Name:</strong> {employee.first_name}</Typography>
+                        <Typography variant="body1" mt={1}><strong>Last Name:</strong> {employee.last_name}</Typography>
+                        <Typography variant="body1" mt={1}><strong>Email:</strong> {employee.email}</Typography>
+                        <Typography variant="body1" mt={1}><strong>Address:</strong> {employee.address}</Typography>
+                        <Typography variant="body1" mt={1}><strong>Phone:</strong> {employee.phone}</Typography>
+                        <Typography variant="body1" mt={1}><strong>Role:</strong> {employee.role}</Typography>
+                    </Paper>
+                    <Box mt={3}>
+                        <Button variant="contained" color="primary" onClick={handleUpdate} sx={{ borderRadius: 2, px: 3, py: 1, backgroundColor: "#ff735c" }}>
+                            Update Profile
+                        </Button>
+                    </Box>
                 </Paper>
-                <Box mt={3}>
-                    <Button variant="contained" color="primary" onClick={handleUpdate} sx={{ borderRadius: 2, px: 3, py: 1, backgroundColor: "#ff735c" }}>
-                        Update Profile
-                    </Button>
-                </Box>
-            </Paper>
-        </Container>
+            </Container>
+        </>
     );
 };
 
