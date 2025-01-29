@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { CircularProgress, Container, Typography, Paper, Button, Box } from "@mui/material";
 import useremp from "../assets/useremp.png"; 
 import Navbar from "../components/common/Navbar";
+import { Helmet } from "react-helmet";
 import { fetchEmployeeDetails } from "../services/employeeProfileService";
 
 interface Employee {
@@ -89,6 +90,11 @@ const EmployeeProfile: React.FC = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Profile</title>
+                <meta name="description" content="View and update your employee profile information." />
+                <meta name="keywords" content="employee profile, employee portal, user profile, update profile" />
+            </Helmet>
             <Navbar/>
             <Container maxWidth="sm" sx={{ mt: 5 }}>
                 <Paper elevation={3} sx={{ p: 4, borderRadius: 3, textAlign: "center", backgroundColor: "#f9f9f9" }}>
