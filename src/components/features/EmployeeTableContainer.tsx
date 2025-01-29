@@ -10,21 +10,19 @@ const EmployeeTableContainer: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Fetch the token from local storage
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("authToken");
 
   // Fetch employee data when component mounts
   useEffect(() => {
     const fetchEmployeesData = async () => {
       if (!token) {
         setError("Authentication required");
-        console.log("Token from localStorage:", token);
         setLoading(false);
         return;
       }
 
       try {
         const employeeData = await fetchEmployees(token);
-        console.log("Fetched employee data:", employeeData);
         setEmployees(employeeData);
       } catch (error) {
         console.error("Error fetching employees:", error);
@@ -67,6 +65,7 @@ const EmployeeTableContainer: React.FC = () => {
       </Box>
     );
   }
+
   return <EmployeeTable employees={employees} />;
 };
 
