@@ -32,7 +32,7 @@ const Register: React.FC = () => {
                 password: password,
             });
             alert("Employee Registration Successfully");
-            navigate("/login");
+            navigate("/");
         } catch (err) {
             alert(err);
         }
