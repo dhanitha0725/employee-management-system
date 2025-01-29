@@ -16,9 +16,21 @@ const Login: React.FC = () => {
     event.preventDefault();
     try {
       const res = await loginUser(email, password);
+      
       if (res.access_token) {
         localStorage.setItem("authToken", res.access_token);
-        navigate("/employeePage");
+  
+        // Decode the token to get user role (assuming it's a JWT token)
+        const payload = JSON.parse(atob(res.access_token.split(".")[1]));
+        const userRole = payload.role; // Adjust this based on your token structure
+  
+        if (userRole === "ROLE_EMPLOYEE") {
+          navigate("/employeeProfile");
+        } else if (userRole === "ROLE_ADMIN") {
+          navigate("/employeePage");
+        } else {
+          alert("Unauthorized role.");
+        }
       } else {
         alert("Login failed. Check your email or password.");
       }
