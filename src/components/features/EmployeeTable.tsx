@@ -2,24 +2,27 @@ import React, { useMemo } from "react";
 import { MaterialReactTable, type MRT_ColumnDef } from "material-react-table";
 import { Employee } from "../../Types/Employee";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface EmployeeTableProps {
   employees: Employee[];
 }
 
 const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees }) => {
+  const navigate = useNavigate();
+
   // Define columns for the table
   const columns = useMemo<MRT_ColumnDef<Employee>[]>(
     () => [
       {
         accessorKey: "id", // Employee ID
-        header: "ID",
+        header: "Employee ID",
         size: 100,
       },
       {
         accessorKey: "firstName", // First Name
         header: "First Name",
-        size: 200,
+        size: 150,
       },
       {
         accessorKey: "lastName", // Last Name
@@ -47,15 +50,16 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees }) => {
         size: 150,
       },
       {
-        accessorKey: "actions", // Actions (Edit/Delete buttons)
+        accessorKey: "actions", // Edit/Delete buttons
         header: "Actions",
         size: 200,
-        Cell: () => (
+        Cell: ({ row }) => (
           <div>
             <Button
               variant="contained"
               color="primary"
               style={{ marginRight: "10px" }}
+              onClick={() => navigate(`/employee/update/${row.original.id}`)}
             >
               Edit
             </Button>
@@ -66,18 +70,18 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees }) => {
         ),
       },
     ],
-    []
+    [navigate]
   );
 
   return (
     <MaterialReactTable
       columns={columns}
       data={employees} // Employee data
-      enableColumnResizing // Enable resizing of columns
-      enableStickyHeader // Sticky header for better visibility
+      enableColumnResizing
+      enableStickyHeader
       initialState={{
         pagination: {
-          pageSize: 10, // Default rows per page
+          pageSize: 10,
           pageIndex: 0,
         },
       }}
