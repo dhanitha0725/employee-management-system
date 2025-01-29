@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import RegisterImg from '../assets/RegisterImg.jpg';
+import RegisterImg from '../assets/Employee.jpg';
 import { useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
