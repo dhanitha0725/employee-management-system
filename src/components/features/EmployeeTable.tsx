@@ -37,7 +37,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, fetchEmployees
       {
         accessorKey: "id", // Employee ID
         header: "Employee ID",
-        size: 100,
+        size: 150,
       },
       {
         accessorKey: "firstName", // First Name
@@ -100,9 +100,12 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, fetchEmployees
   return (
     <MaterialReactTable
       columns={columns}
-      data={employees} // Employee data
+      data={employees}
       enableColumnResizing
       enableStickyHeader
+      enableStickyFooter
+      enablePagination
+      muiTableContainerProps={{ sx: { maxHeight: "500px", overflow: "auto" } }} 
       initialState={{
         pagination: {
           pageSize: 10,
