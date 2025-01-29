@@ -1,65 +1,43 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../services/authService";
 import EmployeeImg from "../assets/Employee.jpg";
-import axios from "axios";
 import { Helmet } from "react-helmet";
+import InputField from "../components/inputField";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./style.css";
+import "../styles/LoginRegister.css";
 
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login: React.FC = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
-  async function login(event: React.FormEvent<HTMLFormElement>) {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await axios
-        .post("http://localhost:8090/auth/login", {
-          email: email,
-          password: password,
-        })
-        .then(
-          (res) => {
-            console.log(res.data);
-
-            // Check if a token is returned
-            if (res.data.access_token) {
-              localStorage.setItem("authToken", res.data.access_token);
-              // Navigate to the employee page
-              navigate("/employeePage");
-            } else {
-              // If no token, display an error
-              alert("Login failed. Please check your email or password.");
-            }
-          },
-          (fail) => {
-            console.error(fail);
-          }
-        );
-    } catch (err) {
+      const res = await loginUser(email, password);
+      if (res.access_token) {
+        localStorage.setItem("authToken", res.access_token);
+        navigate("/employeePage");
+      } else {
+        alert("Login failed. Check your email or password.");
+      }
+    } catch (error) {
       alert("An error occurred during login. Please try again.");
-      console.error(err);
     }
-  }
+  };
 
   return (
     <>
       <Helmet>
         <title>Login - Employee Portal</title>
-        <meta
-          name="description"
-          content="Log in to access your employee account and manage details."
-        />
-        <meta
-          name="keywords"
-          content="login, employee portal, employee management"
-        />
+        <meta name="description" content="Log in to access your employee account and manage details."/>
+        <meta name="keywords" content="login, employee portal, employee management"/>
       </Helmet>
 
       <div className="container-fluid vh-100">
         <div className="row">
-          {/* Left Side (Image) */}
+          {/* Left Side */}
           <div className="col-md-6 d-flex align-items-center justify-content-center">
             <img
               src={EmployeeImg}
@@ -69,64 +47,25 @@ function Login() {
             />
           </div>
 
-          {/* Right Side (Form) */}
+          {/* Right Side */}
           <div className="col-12 col-md-6 d-flex align-items-center justify-content-center p-3">
-            <div
-              className="card shadow-lg p-4 w-100"
-              style={{ maxWidth: "500px" }}
-            >
-              <h1
-                className="text-center mb-4"
-                style={{ color: "#3a5c64", fontWeight: 600 }}
-              >
+            <div className="card shadow-lg p-4 w-100" style={{ maxWidth: "500px" }}>
+              <h1 className="text-center mb-4" style={{ color: "#3a5c64", fontWeight: 600 }}>
                 Employee Login
               </h1>
-              <form onSubmit={login}>
-                <div className="form-floating mb-4">
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder="Enter Email"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                  />
-                  <label htmlFor="email">Email</label>
-                </div>
-
-                <div className="form-floating mb-4">
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Enter Password"
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                  />
-                  <label htmlFor="password">Password</label>
-                </div>
+              <form onSubmit={handleLogin}>
+                <InputField label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <InputField label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
                 <div className="d-flex justify-content-center mt-4">
-                  <button
-                    type="submit"
-                    className="btn"
-                    style={{
-                      backgroundColor: "#ff735c",
-                      color: "white",
-                      width: "50%",
-                    }}
-                  >
+                  <button type="submit" className="btn" style={{ backgroundColor: "#ff735c", color: "white", width: "50%" }}>
                     Login
                   </button>
                 </div>
 
                 <div className="d-flex justify-content-center mt-3">
                   <p>Don't Have an Account?</p>
-                  <a
-                    href="/register"
-                    className="ms-2"
-                    style={{ color: "#ff735c" }}
-                  >
+                  <a href="/register" className="ms-2" style={{ color: "#ff735c" }}>
                     Sign Up
                   </a>
                 </div>
@@ -137,6 +76,6 @@ function Login() {
       </div>
     </>
   );
-}
+};
 
 export default Login;
