@@ -1,0 +1,93 @@
+body {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container .maintitle {
+    text-align: center;
+    margin-top: 50px;
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #000000;
+    border-radius: 5px;
+}
+.container {
+    padding: 20px;
+    margin-top: 50px;
+    background: #de5718;
+    box-shadow: 0 16px 16px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    
+}
+
+.container .image-paper {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+}
+
+.Userimg {
+    width: 150px;
+    height: 150px;
+    border-radius: 4px;
+    margin-right: 20px;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.image-paper .title {
+    margin: 0;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+.image-paper .role {
+    margin: 0;
+    color: #666;
+}
+
+.container .paper {
+    padding: 30px;
+    margin-top: 20px;
+    background-color: #ffffff; /* Ensure the color value is correct */
+    border-radius: 10px;
+}
+
+.title {
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.container .info {
+    margin-bottom: 10px;
+    text-align: left;
+    font-size: large;
+    
+}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.container .button {
+    background-color: #ff8800;
+    color: rgb(0, 0, 0);
+}
+
+.container .button:hover {
+    background-color: #b33c00;
+    color: #ffffff;
+}
