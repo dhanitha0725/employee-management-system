@@ -1,12 +1,5 @@
 import React, { FC, useState } from "react";
-import {
-  TextField,
-  Button,
-  Box,
-  Typography,
-  Paper,
-  Container,
-} from "@mui/material";
+import {TextField, Button, Box, Typography, Paper, Container} from "@mui/material";
 import { EmployeeUpdate } from "../../Types/EmployeeUpdate";
 
 type EmployeeUpdateFormProps = {
@@ -74,15 +67,16 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             fullWidth
             label="Email"
             name="email"
-            value={formData.first_name}
+            value={formData.email}
             onChange={handleChange}
             variant="outlined"
           />
           <TextField
             fullWidth
             label="Password"
+            type="password"
             name="password"
-            value={formData.first_name}
+            value={formData.password}
             onChange={handleChange}
             variant="outlined"
           />

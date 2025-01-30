@@ -35,7 +35,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees, fetchEmployees
   const columns = useMemo<MRT_ColumnDef<Employee>[]>(
     () => [
       {
-        accessorKey: "id", // Employee ID
+        accessorKey: "employeeId", // Employee ID
         header: "Employee ID",
         size: 150,
       },

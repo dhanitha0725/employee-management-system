@@ -41,8 +41,8 @@ const EmployeeProfile: React.FC = () => {
     
                 // Correct the mapping
                 const formattedEmployee: Employee = {
-                    id: data.id,                      
-                    employee_id: data.id.toString(),  
+                    id: data.employeeId,                      
+                    employee_id: data.employeeId.toString(),  
                     first_name: data.firstName,       
                     last_name: data.lastName,         
                     email: data.email,                 
