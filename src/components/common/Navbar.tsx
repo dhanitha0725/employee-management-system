@@ -20,9 +20,9 @@ const Navbar: React.FC = () => {
           <Typography variant="h6" component="div" className="title">
             Employee Management System
           </Typography>
-          <Button className="logout-button" onClick={handleLogoutClick} startIcon={<LogoutIcon className="logout-icon" />}>
+            <Button className="logout-button" onClick={handleLogoutClick} startIcon={<LogoutIcon className="logout-icon" />} style={{ color: 'white' }}>
             Logout
-          </Button>
+            </Button>
         </Toolbar>
       </AppBar>
 
