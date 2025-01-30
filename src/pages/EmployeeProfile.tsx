@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { CircularProgress, Container, Typography, Paper, Button, Box } from "@mui/material";
+import { CircularProgress, Container, Typography, Paper, Box } from "@mui/material";
 import useremp from "../assets/useremp.png"; 
 import Navbar from "../components/common/Navbar";
 import { Helmet } from "react-helmet";
@@ -21,13 +20,9 @@ const EmployeeProfile: React.FC = () => {
     const [employee, setEmployee] = useState<Employee | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const navigate = useNavigate();
+    
 
-    const handleUpdate = () => {
-        if (employee) {
-            navigate(`/employee/update/${employee.id}`);
-        }
-    };
+ 
 
     useEffect(() => {
         const getEmployeeDetails = async () => {
@@ -121,11 +116,7 @@ const EmployeeProfile: React.FC = () => {
                         <Typography variant="body1" mt={1}><strong>Phone:</strong> {employee.phone}</Typography>
                         <Typography variant="body1" mt={1}><strong>Role:</strong> {employee.role}</Typography>
                     </Paper>
-                    <Box mt={3}>
-                        <Button variant="contained" color="primary" onClick={handleUpdate} sx={{ borderRadius: 2, px: 3, py: 1, backgroundColor: "#ff735c" }}>
-                            Update Profile
-                        </Button>
-                    </Box>
+                    
                 </Paper>
             </Container>
         </>
