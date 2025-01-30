@@ -38,7 +38,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
   const columns = useMemo<MRT_ColumnDef<Employee>[]>(
     () => [
       {
-        accessorKey: "id", // Employee ID
+        accessorKey: "employeeId", // Employee ID
         header: "Employee ID",
         size: 150,
       },
@@ -83,7 +83,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
               color="primary"
               style={{ marginRight: "10px" }}
               onClick={() =>
-                navigate(`/employee/update/${row.original.id}`)
+                navigate(`/employee/update/${row.original.employeeId}`)
               }
             >
               Edit
@@ -91,7 +91,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
             <Button
               variant="contained"
               color="error"
-              onClick={() => handleDelete(row.original.id)}
+              onClick={() => handleDelete(row.original.employeeId)}
             >
               Delete
             </Button>
