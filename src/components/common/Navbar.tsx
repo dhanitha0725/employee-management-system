@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import LogoutDialog from "./LogoutDialog"; 
+import './Navbar.css'; // Import the CSS file
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -14,12 +15,12 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <AppBar position="static" sx={{ width: "100%" }}>
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+      <AppBar position="static" className="appbar" style={{ backgroundColor: '#fc7e00' }}>
+        <Toolbar className="toolbar">
+          <Typography variant="h6" component="div" className="title">
             Employee Management System
           </Typography>
-          <Button color="inherit" onClick={handleLogoutClick} startIcon={<LogoutIcon />}>
+          <Button className="logout-button" onClick={handleLogoutClick} startIcon={<LogoutIcon className="logout-icon" />}>
             Logout
           </Button>
         </Toolbar>
