@@ -12,7 +12,7 @@ const EmployeePage: React.FC = () => {
       <Box className="employee-page-container">
         <h1 className="employee-page-title">Employee Details</h1>
         <Box className="search-bar-container"></Box>
-        <Box className="employee-table-container">
+        <Box className="employee-table-container" sx={{ backgroundColor:'#fc7e00' }}>
           <EmployeeTableContainer />
         </Box>
       </Box>

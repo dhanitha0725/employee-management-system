@@ -1,31 +1,100 @@
+/* Page Container - Dark Theme with Futuristic Glow */
 .employee-page-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    text-align: center;
-    width: 100%;
-  }
-  
-  .employee-page-title {
-    margin: -100px;
-  }
-  
-  .search-bar-container {
-    display: flex;
-    align-items: center;
-    gap: 2;
-    margin-bottom: 2;
-  }
-  
-  .employee-table-container {
-    width: 100%;
-    max-width: 1000px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  width: 100%;
+  background-color: #121212; /* Deep black background */
+  color: white;
+}
+
+/* Title - Bold Orange */
+.employee-page-title {
+  margin-top: -80px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ff7300; /* Bright orange */
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255, 115, 0, 0.8);
+}
+
+/* Search Bar Styling */
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.1); /* Subtle white opacity */
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(255, 115, 0, 0.5);
+}
+
+/* Employee Table Container */
+.employee-table-container {
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05); /* Subtle glass-like effect */
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 15px rgba(255, 115, 0, 0.8);
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  color: white;
+}
+
+/* Table Headers */
+th {
+  background-color: #ff7300;
+  color: black;
+  padding: 12px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+/* Alternating Table Row Colors */
+tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Table Data */
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Edit Button */
+.edit-btn {
+  background-color: #ff7300;
+  color: black;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  box-shadow: 0 0 8px rgba(255, 115, 0, 0.6);
+}
+
+.edit-btn:hover {
+  background-color: #ff5700;
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255, 87, 0, 0.8);
+}

@@ -1,0 +1,58 @@
+
+.appbar {
+    background-color: #FF6B35;
+    box-shadow: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+  
+  .toolbar {
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  @media (max-width: 600px) {
+    .toolbar {
+      padding: 16px;
+    }
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.05em;
+  }
+  
+  @media (max-width: 600px) {
+    .title {
+      font-size: 1.25rem;
+    }
+  }
+  
+  .logout-button {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 20px;
+    border-radius: 8px;
+    text-transform: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    display: flex;
+    gap: 8px;
+    color: yellow;
+    align-items: center;
+  }
+  
+  .logout-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+  }
+  
+  .logout-icon {
+    color: white;
+  }
+  

@@ -15,7 +15,6 @@ const App: React.FC = () => {
           <Route path="/" element={<Login />} />
           <Route path="/employeePage" element={<EmployeePage />} />
           <Route path="/employeeProfile" element={<EmployeeProfile />} />{" "}
-          {/* Add this line */}
           <Route path="/employee/update/:id" element={<EmployeeUpdatePage />} />
         </Routes>
       </Router>

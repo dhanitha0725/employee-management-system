@@ -98,7 +98,7 @@ const EmployeeUpdatePage: React.FC = () => {
 
         {employee && (
           <>
-            <h1>Update Employee Details</h1>
+            <h1 style={{ textAlign: "center" }}>Update Employee Details</h1>
             <EmployeeUpdateForm employee={employee} onUpdate={handleUpdate} />
           </>
         )}
