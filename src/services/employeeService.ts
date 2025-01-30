@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const GET_ALL_USERS_API_URL = "http://localhost:8090/users/";
-const DELETE_API_URL = "http://localhost:8090/employee/";
+const DELETE_API_URL = "http://localhost:8090/employee/delete";
 const GET_USER_BY_ID_API_URL = "http://localhost:8090/employee/getEmployeeById";
 const UPDATE_USER_API_URL = "http://localhost:8090/employee/update";
 
@@ -13,6 +13,7 @@ export const fetchEmployees = async (token: string) => {
             Authorization: `Bearer ${token}`, //pass jwt token
         },
     });
+    console.log("response", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching employees:", error);
@@ -21,7 +22,7 @@ export const fetchEmployees = async (token: string) => {
 
 export const deleteEmployee = async (employeeId: number, token: string): Promise<void> => {
   try {
-    await axios.delete(`${DELETE_API_URL}/delete/${employeeId}`, {
+    await axios.delete(`${DELETE_API_URL}/${employeeId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
