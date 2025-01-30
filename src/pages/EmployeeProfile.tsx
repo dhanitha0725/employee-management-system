@@ -24,7 +24,9 @@ const EmployeeProfile: React.FC = () => {
     const navigate = useNavigate();
 
     const handleUpdate = () => {
-        navigate("/update-employee");
+        if (employee) {
+            navigate(`/employee/update/${employee.id}`);
+        }
     };
 
     useEffect(() => {
