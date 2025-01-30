@@ -1,9 +1,10 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { MaterialReactTable, type MRT_ColumnDef } from "material-react-table";
 import { deleteEmployee } from "../../services/employeeService";
 import { Employee } from "../../Types/Employee";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import DeleteDialog from "../common/DeleteDialog";
 
 interface EmployeeTableProps {
   employees: Employee[];
@@ -15,6 +16,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
   fetchEmployees,
 }) => {
   const navigate = useNavigate();
+  const [openDialogId, setOpenDialogId] = useState<number | null>(null); // Track which row's dialog is open
 
   const handleDelete = async (employeeId: number) => {
     const token = localStorage.getItem("authToken");
@@ -27,10 +29,12 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
       await deleteEmployee(employeeId, token);
       alert(`Employee with ID ${employeeId} has been deleted successfully.`);
       if (fetchEmployees) {
-        fetchEmployees(); // Only call if it exists
+        fetchEmployees(); // Refresh data after deletion
       }
     } catch {
       alert("An error occurred while deleting the employee.");
+    } finally {
+      setOpenDialogId(null); // Close dialog after delete
     }
   };
 
@@ -38,76 +42,84 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
   const columns = useMemo<MRT_ColumnDef<Employee>[]>(
     () => [
       {
-        accessorKey: "employeeId", // Employee ID
+        accessorKey: "employeeId",
         header: "Employee ID",
-        size: 100,
+        size: 150,
       },
       {
-        accessorKey: "firstName", // First Name
+        accessorKey: "firstName",
         header: "First Name",
         size: 150,
       },
       {
-        accessorKey: "lastName", // Last Name
+        accessorKey: "lastName",
         header: "Last Name",
         size: 150,
       },
       {
-        accessorKey: "email", // Email
+        accessorKey: "email",
         header: "Email",
         size: 250,
       },
       {
-        accessorKey: "role", // Role
+        accessorKey: "role",
         header: "Role",
         size: 150,
       },
       {
-        accessorKey: "address", // Address
+        accessorKey: "address",
         header: "Address",
         size: 300,
       },
       {
-        accessorKey: "phone", // Phone
+        accessorKey: "phone",
         header: "Phone",
         size: 150,
       },
       {
-        accessorKey: "actions", // Edit/Delete buttons
+        accessorKey: "actions",
         header: "Actions",
         size: 200,
-        Cell: ({ row }) => (
-          <div>
-            <Button
-              variant="contained"
-              color="primary"
-              style={{ marginRight: "10px" }}
-              onClick={() =>
-                navigate(`/employee/update/${row.original.employeeId}`)
-              }
-            >
-              Edit
-            </Button>
-            <Button
-              variant="contained"
-              color="error"
-              onClick={() => handleDelete(row.original.employeeId)}
-            >
-              Delete
-            </Button>
-          </div>
-        ),
+        Cell: ({ row }) => {
+          const employeeId = row.original.employeeId;
+          return (
+            <div>
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ marginRight: "10px" }}
+                onClick={() => navigate(`/employee/update/${employeeId}`)}
+              >
+                Edit
+              </Button>
+
+              <Button variant="contained" color="error" onClick={() => setOpenDialogId(employeeId)}>
+                Delete
+              </Button>
+
+              {/* Delete Confirmation Dialog */}
+              <DeleteDialog
+                open={openDialogId === employeeId}
+                onClose={() => setOpenDialogId(null)}
+                onDelete={() => handleDelete(employeeId)}
+              />
+            </div>
+          );
+        },
       },
     ],
-    [handleDelete]
+    [openDialogId] // Depend on openDialogId so it updates correctly
   );
 
   return (
     <MaterialReactTable
       columns={columns}
-      data={employees} // Employee data
+      data={employees}
       enableColumnResizing
       enableStickyHeader
+      enableStickyFooter
+      enablePagination
+      muiTableContainerProps={{ sx: { maxHeight: "500px", overflow: "auto" } }} 
       initialState={{
         pagination: {
           pageSize: 10,

@@ -10,8 +10,8 @@ import {
 import { EmployeeUpdate } from "../../Types/EmployeeUpdate";
 
 type EmployeeUpdateFormProps = {
-  employee: EmployeeUpdate & { employeeId: number }; // Include employeeId in the type
-  onUpdate: (employee: EmployeeUpdate) => Promise<void>;
+  employee: EmployeeUpdate;
+  onUpdate: (employee: EmployeeUpdate) => void;
 };
 
 export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
@@ -19,12 +19,12 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
   onUpdate,
 }) => {
   const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    address: "",
-    phone: "",
+    first_name: employee.first_name,
+    last_name: employee.last_name,
+    email: employee.email,
+    password: employee.password,
+    address: employee.address,
+    phone: employee.phone,
   });
 
   useEffect(() => {
@@ -74,7 +74,6 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
           <Typography variant="h5" component="h1" align="center" gutterBottom>
             Update Employee
           </Typography>
-
           <TextField
             fullWidth
             label="First Name"
@@ -82,9 +81,7 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.first_name}
             onChange={handleChange}
             variant="outlined"
-            required
           />
-
           <TextField
             fullWidth
             label="Last Name"
@@ -92,9 +89,7 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.last_name}
             onChange={handleChange}
             variant="outlined"
-            required
           />
-
           <TextField
             fullWidth
             label="Email"
@@ -103,7 +98,6 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             onChange={handleChange}
             variant="outlined"
             disabled
-            id="outlined-disabled"
           />
 
           <TextField
@@ -113,9 +107,7 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.address}
             onChange={handleChange}
             variant="outlined"
-            required
           />
-
           <TextField
             fullWidth
             label="Phone"
@@ -123,9 +115,7 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.phone}
             onChange={handleChange}
             variant="outlined"
-            required
           />
-
           <Button
             type="submit"
             variant="contained"
@@ -140,5 +130,4 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
     </Container>
   );
 };
-
 export default EmployeeUpdateForm;
