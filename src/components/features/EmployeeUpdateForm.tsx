@@ -29,8 +29,8 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
 
   useEffect(() => {
     setFormData({
-      first_name: employee.first_name,
-      last_name: employee.last_name,
+      first_name: employee.firstName,
+      last_name: employee.lastName,
       email: employee.email,
       password: employee.password,
       address: employee.address,
@@ -48,10 +48,14 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      //console.log("Submitting form data:", formData); // debug  line
+      console.log("Submitting form data:", formData); // debug  line
       await onUpdate(formData);
+      console.log("Submitting form data:", formData); // debug  line
+      console.log(employee.employeeId);
     } catch (error) {
       console.error("Update failed:", error);
+      // print id in console
+      console.log(employee.employeeId);
     }
   };
 
@@ -98,17 +102,8 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.email}
             onChange={handleChange}
             variant="outlined"
-            required
-          />
-
-          <TextField
-            fullWidth
-            label="Password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            variant="outlined"
-            required
+            disabled
+            id="outlined-disabled"
           />
 
           <TextField

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const GET_ALL_USERS_API_URL = "http://localhost:8090/users/";
 const DELETE_API_URL = "http://localhost:8090/employee/";
-const GET_USER_BY_ID_API_URL = "http://localhost:8090/employee/getEmployeeById";
+const GET_USER_BY_ID_API_URL = "http://localhost:8090/users/getEmployeeById";
 const UPDATE_USER_API_URL = "http://localhost:8090/employee/update";
 
 // fetch all employees
@@ -57,6 +57,9 @@ export const updateEmployee = async (employeeId: number, token: string, employee
     });
     return response.data;
   } catch (error) {
+    //print token in console
+    console.log(token);
+    console.log(employeeId);
     console.error("Error updating employee:", error);
     throw error;
   }
