@@ -48,9 +48,9 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      console.log("Submitting form data:", formData); // debug  line
+      console.log("Submitting form data:", formData); // debug line
       await onUpdate(formData);
-      console.log("Submitting form data:", formData); // debug  line
+      console.log("Submitting form data:", formData); // debug line
       console.log(employee.employeeId);
     } catch (error) {
       console.error("Update failed:", error);
@@ -61,7 +61,16 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
 
   return (
     <Container component="main" maxWidth="sm">
-      <Paper elevation={3} sx={{ padding: 4, marginTop: 4 }}>
+      <Paper
+        elevation={5}
+        sx={{
+          padding: 4,
+          marginTop: 4,
+          borderRadius: "10px",
+          border: "2px solid #ff9800",
+          backgroundColor: "#ffffff",
+        }}
+      >
         <Box
           component="form"
           onSubmit={handleSubmit}
@@ -71,7 +80,13 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             gap: 3,
           }}
         >
-          <Typography variant="h5" component="h1" align="center" gutterBottom>
+          <Typography
+            variant="h5"
+            component="h1"
+            align="center"
+            gutterBottom
+            sx={{ color: "#ff9800", fontWeight: "bold" }}
+          >
             Update Employee
           </Typography>
           <TextField
@@ -81,6 +96,13 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.first_name}
             onChange={handleChange}
             variant="outlined"
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "#ff9800" },
+                "&:hover fieldset": { borderColor: "#e68900" },
+                "&.Mui-focused fieldset": { borderColor: "#ff9800" },
+              },
+            }}
           />
           <TextField
             fullWidth
@@ -89,6 +111,13 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.last_name}
             onChange={handleChange}
             variant="outlined"
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "#ff9800" },
+                "&:hover fieldset": { borderColor: "#e68900" },
+                "&.Mui-focused fieldset": { borderColor: "#ff9800" },
+              },
+            }}
           />
           <TextField
             fullWidth
@@ -98,8 +127,13 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             onChange={handleChange}
             variant="outlined"
             disabled
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                backgroundColor: "#eeeeee",
+                borderRadius: "5px",
+              },
+            }}
           />
-
           <TextField
             fullWidth
             label="Address"
@@ -107,6 +141,13 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.address}
             onChange={handleChange}
             variant="outlined"
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "#ff9800" },
+                "&:hover fieldset": { borderColor: "#e68900" },
+                "&.Mui-focused fieldset": { borderColor: "#ff9800" },
+              },
+            }}
           />
           <TextField
             fullWidth
@@ -115,13 +156,25 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.phone}
             onChange={handleChange}
             variant="outlined"
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": { borderColor: "#ff9800" },
+                "&:hover fieldset": { borderColor: "#e68900" },
+                "&.Mui-focused fieldset": { borderColor: "#ff9800" },
+              },
+            }}
           />
           <Button
             type="submit"
             variant="contained"
-            color="primary"
             fullWidth
-            sx={{ mt: 2 }}
+            sx={{
+              mt: 2,
+              backgroundColor: "#ff9800",
+              color: "white",
+              fontWeight: "bold",
+              "&:hover": { backgroundColor: "#e68900" },
+            }}
           >
             Update
           </Button>
@@ -130,4 +183,5 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
     </Container>
   );
 };
+
 export default EmployeeUpdateForm;
