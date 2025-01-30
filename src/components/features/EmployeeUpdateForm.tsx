@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -27,6 +27,17 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
     phone: employee.phone,
   });
 
+  useEffect(() => {
+    setFormData({
+      first_name: employee.firstName,
+      last_name: employee.lastName,
+      email: employee.email,
+      password: employee.password,
+      address: employee.address,
+      phone: employee.phone,
+    });
+  }, [employee]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -34,9 +45,18 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onUpdate({ ...employee, ...formData });
+    try {
+      console.log("Submitting form data:", formData); // debug  line
+      await onUpdate(formData);
+      console.log("Submitting form data:", formData); // debug  line
+      console.log(employee.employeeId);
+    } catch (error) {
+      console.error("Update failed:", error);
+      // print id in console
+      console.log(employee.employeeId);
+    }
   };
 
   return (
@@ -58,7 +78,7 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             fullWidth
             label="First Name"
             name="first_name"
-            value={formData.first_name} 
+            value={formData.first_name}
             onChange={handleChange}
             variant="outlined"
           />
@@ -66,7 +86,7 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             fullWidth
             label="Last Name"
             name="last_name"
-            value={formData.last_name} 
+            value={formData.last_name}
             onChange={handleChange}
             variant="outlined"
           />
@@ -74,24 +94,17 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             fullWidth
             label="Email"
             name="email"
-            value={formData.email} 
+            value={formData.email}
             onChange={handleChange}
             variant="outlined"
+            disabled
           />
-          <TextField
-            fullWidth
-            label="Password"
-            name="password"
-            type="password"
-            value={formData.password} 
-            onChange={handleChange}
-            variant="outlined"
-          />
+
           <TextField
             fullWidth
             label="Address"
             name="address"
-            value={formData.address} 
+            value={formData.address}
             onChange={handleChange}
             variant="outlined"
           />
@@ -99,7 +112,7 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             fullWidth
             label="Phone"
             name="phone"
-            value={formData.phone} 
+            value={formData.phone}
             onChange={handleChange}
             variant="outlined"
           />

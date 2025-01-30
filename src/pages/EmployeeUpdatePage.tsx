@@ -31,7 +31,7 @@ const EmployeeUpdatePage: React.FC = () => {
         }
 
         const data = await fetchEmployee(parseInt(id), token); // Convert id to number
-        //console.log("Fetched employee data:", data); // debug line
+        console.log("Fetched employee data:", data); // debug line
         setEmployee({ ...data, employeeId: parseInt(id) });
       } catch (error) {
         setError(
@@ -56,7 +56,7 @@ const EmployeeUpdatePage: React.FC = () => {
         throw new Error("Missing employee ID or authentication token");
       }
 
-      //console.log("Updating employee with data:", updatedEmployee); // debug line
+      console.log("Updating employee with data:", updatedEmployee); // debug line
       await updateEmployee(parseInt(id), token, updatedEmployee);
       setSnackbar({
         open: true,
