@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -10,8 +10,8 @@ import {
 import { EmployeeUpdate } from "../../Types/EmployeeUpdate";
 
 type EmployeeUpdateFormProps = {
-  employee: EmployeeUpdate;
-  onUpdate: (employee: EmployeeUpdate) => void;
+  employee: EmployeeUpdate & { employeeId: number }; // Include employeeId in the type
+  onUpdate: (employee: EmployeeUpdate) => Promise<void>;
 };
 
 export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
@@ -19,13 +19,24 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
   onUpdate,
 }) => {
   const [formData, setFormData] = useState({
-    first_name: employee.first_name,
-    last_name: employee.last_name,
-    email: employee.email,
-    password: employee.password,
-    address: employee.address,
-    phone: employee.phone,
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    address: "",
+    phone: "",
   });
+
+  useEffect(() => {
+    setFormData({
+      first_name: employee.first_name,
+      last_name: employee.last_name,
+      email: employee.email,
+      password: employee.password,
+      address: employee.address,
+      phone: employee.phone,
+    });
+  }, [employee]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -34,9 +45,14 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onUpdate({ ...employee, ...formData });
+    try {
+      //console.log("Submitting form data:", formData); // debug  line
+      await onUpdate(formData);
+    } catch (error) {
+      console.error("Update failed:", error);
+    }
   };
 
   return (
@@ -54,6 +70,7 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
           <Typography variant="h5" component="h1" align="center" gutterBottom>
             Update Employee
           </Typography>
+
           <TextField
             fullWidth
             label="First Name"
@@ -61,7 +78,9 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.first_name}
             onChange={handleChange}
             variant="outlined"
+            required
           />
+
           <TextField
             fullWidth
             label="Last Name"
@@ -69,23 +88,29 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.last_name}
             onChange={handleChange}
             variant="outlined"
+            required
           />
+
           <TextField
             fullWidth
             label="Email"
             name="email"
-            value={formData.first_name}
+            value={formData.email}
             onChange={handleChange}
             variant="outlined"
+            required
           />
+
           <TextField
             fullWidth
             label="Password"
             name="password"
-            value={formData.first_name}
+            value={formData.password}
             onChange={handleChange}
             variant="outlined"
+            required
           />
+
           <TextField
             fullWidth
             label="Address"
@@ -93,7 +118,9 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.address}
             onChange={handleChange}
             variant="outlined"
+            required
           />
+
           <TextField
             fullWidth
             label="Phone"
@@ -101,7 +128,9 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
             value={formData.phone}
             onChange={handleChange}
             variant="outlined"
+            required
           />
+
           <Button
             type="submit"
             variant="contained"
@@ -116,4 +145,5 @@ export const EmployeeUpdateForm: FC<EmployeeUpdateFormProps> = ({
     </Container>
   );
 };
+
 export default EmployeeUpdateForm;
